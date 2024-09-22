@@ -9,12 +9,12 @@
   <p align="center">
     Spring Boot 3, Spring Security, JWT, JPA, Swagger UI
     <br />
-    <a href="swagger-link-goes-here"><strong>Explore the docs »</strong></a>
+    <a href="https://movie-catalog-api-ky7o.onrender.com/swagger-ui/index.html"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="fill-later">Live Demo</a>
+    <a href="https://movie-catalog-api-ky7o.onrender.com">Live Demo</a>
     ·
-    <a href="https://api.jsonbin.io/v3/b/66f03001acd3cb34a88930bb">Postman Collection</a>
+    <a href="https://api.jsonbin.io/v3/b/66f0a0afad19ca34f8aae3ea">Postman Collection</a>
   </p>
 </div>
 
