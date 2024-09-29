@@ -27,10 +27,7 @@ public class GenreController {
     @ApiResponse(responseCode = "200", description = "Genres retrieved successfully", content = {@Content(mediaType = "application/json")})
     @GetMapping("/list")
     public GenericRestListResponse<Genre> list() {
-        GenericRestListResponse<Genre> response = new GenericRestListResponse<>();
-        genreService.listGenres(response);
-
-        return response;
+        return genreService.listGenres();
     }
 
     @Operation(summary = "List Genres by Movie ID", description = "List All Genres that match with the movie id")

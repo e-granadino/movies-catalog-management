@@ -12,12 +12,16 @@ import java.util.List;
 @Service
 public class GenreServiceImpl implements GenreService {
 
-    public void listGenres(GenericRestListResponse<Genre> response) {
+    public GenericRestListResponse<Genre> listGenres() {
         List<Genre> results = genreRepository.findAll();
+
+        GenericRestListResponse<Genre> response = new GenericRestListResponse<>();
         response.setRecords(results);
         response.setMessage("The Genres have been retrieved successfully...");
         response.setStatusCode(200);
         response.setStatus(Constants.SUCCESS_RESPONSE);
+
+        return response;
     }
 
     @Autowired

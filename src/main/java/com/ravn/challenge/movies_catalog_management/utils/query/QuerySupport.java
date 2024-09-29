@@ -10,6 +10,8 @@ import java.util.List;
 
 public class QuerySupport {
 
+    private QuerySupport(){}
+
     public static PageRequest getPageRequest(SearchCriteria searchCriteria) {
 
         int page = searchCriteria.getPage();
@@ -17,7 +19,7 @@ public class QuerySupport {
         String sort = searchCriteria.getSort();
         String sortBy = searchCriteria.getSortBy();
 
-        int innerPage = (page > 0) ? (page - 1) : 0;;
+        int innerPage = (page > 0) ? (page - 1) : 0;
         int innerMaxResults = (maxResults > 0) ? maxResults : Constants.DEFAULT_MAX_RESULTS;
 
         PageRequest request = PageRequest.of(innerPage, innerMaxResults);
@@ -35,9 +37,6 @@ public class QuerySupport {
 
     /**
      * Create a proper query SQL for the performed search
-     *
-     * @param searchCriteria
-     * @return
      */
     public static <T> Specification<T> compileQuery(SearchCriteria searchCriteria) {
         List<CustomJpaSpecification<T>> specs = new ArrayList<>();

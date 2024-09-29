@@ -8,9 +8,9 @@ import com.ravn.challenge.movies_catalog_management.utils.GenericRestResponse;
 import java.util.List;
 
 public interface RatingService {
-    void listRatingByUserName(GenericRestListResponse<Rating> response);
-    void createUserRating(RatingDto ratingDto, GenericRestResponse<Rating> response);
-    void deleteUserRating(Long ratingId, GenericRestResponse<Rating> response);
+    GenericRestListResponse<Rating>  listRatingByUserName();
+    GenericRestResponse<Rating> createUserRating(RatingDto ratingDto);
+    GenericRestResponse<Rating> deleteUserRating(Long ratingId);
     List<Rating> findByMovieId(Long movieId);
     void deleteById(Long id);
 }

@@ -3,6 +3,7 @@ package com.ravn.challenge.movies_catalog_management.security;
 import com.ravn.challenge.movies_catalog_management.exception.UserNotFoundException;
 import com.ravn.challenge.movies_catalog_management.model.User;
 import com.ravn.challenge.movies_catalog_management.service.UserServiceImpl;
+import com.ravn.challenge.movies_catalog_management.utils.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private String[] getRoles(User user) {
-        if(user.getRole().equals("admin")){
-            return new String[]{"user", "admin"};
+        if(user.getRole().equals(Constants.ADMIN_ROLE)){
+            return new String[]{Constants.USER_ROLE, Constants.ADMIN_ROLE};
         }
-        return new String[]{"user"};
+        return new String[]{Constants.USER_ROLE};
     }
 
     @Autowired

@@ -1,9 +1,9 @@
 package com.ravn.challenge.movies_catalog_management.utils.query;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Pagination {
     private Integer currentPage;
@@ -21,6 +21,4 @@ public class Pagination {
     private boolean hasNext;
 
     private boolean hasPrevious;
-
-    public Pagination(){}
 }

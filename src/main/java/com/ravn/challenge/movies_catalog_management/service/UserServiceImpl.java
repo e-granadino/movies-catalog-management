@@ -21,8 +21,9 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUserName(userName);
     }
 
-    public void createUser(UserDto userDto, GenericRestResponse<User> response) {
+    public GenericRestResponse<User> createUser(UserDto userDto) {
         Optional<User> user = userRepository.findByUserName(userDto.getUserName());
+        GenericRestResponse<User> response = new GenericRestResponse<>();
 
         if(user.isEmpty()){
             UserDto sessionUser = sessionDataService.getUserSession();
@@ -48,6 +49,8 @@ public class UserServiceImpl implements UserService{
             response.setStatusCode(HttpStatus.CONFLICT.value());
             response.setStatus(Constants.FAIL_RESPONSE);
         }
+
+        return response;
     }
 
     @Autowired

@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface UserService {
     Optional<User> findByUserName(String userName);
 
-    void createUser(UserDto user, GenericRestResponse<User> response);
+    GenericRestResponse<User> createUser(UserDto user);
 }

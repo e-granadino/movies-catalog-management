@@ -24,9 +24,10 @@ import java.util.Optional;
 public class AuthenticationService {
     static final Logger logger = LogManager.getLogger(AuthenticationService.class);
 
-    public void doAuthentication(AuthRequestDto authRequest, RestTokenResponse response) {
+    public RestTokenResponse doAuthentication(AuthRequestDto authRequest) {
 
         Optional<User> users = userService.findByUserName(authRequest.getUsername());
+        RestTokenResponse response = new RestTokenResponse();
 
         // Checks if user exist on the database
         if(users.isEmpty()){
@@ -64,6 +65,7 @@ public class AuthenticationService {
             response.setStatus(Constants.SUCCESS_RESPONSE);
             response.setStatusCode(HttpStatus.FORBIDDEN.value());
         }
+        return response;
     }
 
     @Autowired

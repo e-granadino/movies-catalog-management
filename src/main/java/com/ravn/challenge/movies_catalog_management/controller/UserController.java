@@ -27,11 +27,7 @@ public class UserController {
     @ApiResponse(responseCode = "404", description = "The user was not found in the database", content = {@Content(mediaType = "application/json")})
     @PostMapping("/auth")
     public RestTokenResponse authUser(@Valid @RequestBody AuthRequestDto authRequest) {
-
-        RestTokenResponse response = new RestTokenResponse();
-        authenticationService.doAuthentication(authRequest, response);
-
-        return response;
+        return authenticationService.doAuthentication(authRequest);
     }
 
     @Operation(summary = "Create User", description = "Creates a new user with role `user`")
@@ -39,10 +35,7 @@ public class UserController {
     @ApiResponse(responseCode = "409", description = "The username is already taken", content = {@Content(mediaType = "application/json")})
     @PostMapping("create")
     public GenericRestResponse<User> createUser(@Valid @RequestBody UserDto user){
-        GenericRestResponse<User> response = new GenericRestResponse<>();
-        userService.createUser(user, response);
-
-        return response;
+        return userService.createUser(user);
     }
 
     @Autowired

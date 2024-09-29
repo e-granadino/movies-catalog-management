@@ -1,5 +1,6 @@
 package com.ravn.challenge.movies_catalog_management.service;
 
+import com.ravn.challenge.movies_catalog_management.exception.UploadImageException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +9,6 @@ import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class StorageService {
 
             return ENDPOINT_URL.concat("/object/public/").concat(BUCKET_NAME).concat("/".concat(fileNameToSave));
         } catch (S3Exception | IOException e) {
-            throw new RuntimeException("Failed to upload image: " + e.getMessage(), e);
+            throw new UploadImageException(e.getMessage());
         }
     }
 }

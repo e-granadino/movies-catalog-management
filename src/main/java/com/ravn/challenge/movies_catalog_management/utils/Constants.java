@@ -1,6 +1,9 @@
 package com.ravn.challenge.movies_catalog_management.utils;
 
 public class Constants {
+
+    private Constants(){}
+
     public static final Integer DEFAULT_MAX_RESULTS = 15;
     public static final String ASC = "ASC";
     public static final String DESC = "DESC";

@@ -5,5 +5,5 @@ import com.ravn.challenge.movies_catalog_management.utils.GenericRestListRespons
 
 public interface GenreService {
 
-    void listGenres(GenericRestListResponse<Genre> response);
+    GenericRestListResponse<Genre> listGenres();
 }

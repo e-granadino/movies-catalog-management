@@ -24,10 +24,7 @@ public class RatingController {
     @ApiResponse(responseCode = "200", description = "The ratings have been retrieved successfully", content = {@Content(mediaType = "application/json")})
     @GetMapping("listAllByUserLogged")
     public GenericRestListResponse<Rating> findByUser(){
-        GenericRestListResponse<Rating> response = new GenericRestListResponse<>();
-        ratingService.listRatingByUserName(response);
-
-        return response;
+        return ratingService.listRatingByUserName();
     }
 
     @Operation(summary = "Create User Rating", description = "Current User logged creates a rating for a movie")
@@ -35,21 +32,15 @@ public class RatingController {
     @ApiResponse(responseCode = "400", description = "Bad Request, the movie which user want to rate was not found on the database.", content = {@Content(mediaType = "application/json")})
     @PostMapping("create")
     public GenericRestResponse<Rating> createUserRating(@Valid @RequestBody RatingDto ratingDto){
-        GenericRestResponse<Rating> response = new GenericRestResponse<>();
-        ratingService.createUserRating(ratingDto, response);
-
-        return response;
+        return ratingService.createUserRating(ratingDto);
     }
 
     @Operation(summary = "Delete Rating", description = "Deletes a Rating by Id")
     @ApiResponse(responseCode = "200", description = "The rating has been deleted successfully", content = {@Content(mediaType = "application/json")})
     @ApiResponse(responseCode = "400", description = "Bad Request, the rating was not found in the database", content = {@Content(mediaType = "application/json")})
     @DeleteMapping("delete/{rateId}")
-    public GenericRestResponse<Rating> deleteRating(@PathVariable(name = "rateId", required = true) Long rateId){
-        GenericRestResponse<Rating> response = new GenericRestResponse<>();
-        ratingService.deleteUserRating(rateId, response);
-
-        return response;
+    public GenericRestResponse<Rating> deleteRating(@PathVariable(name = "rateId") Long rateId){
+        return ratingService.deleteUserRating(rateId);
     }
 
     @Autowired

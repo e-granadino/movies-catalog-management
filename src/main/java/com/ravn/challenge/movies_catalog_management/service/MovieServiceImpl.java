@@ -34,7 +34,7 @@ import java.util.Optional;
 public class MovieServiceImpl implements MovieService{
     static final Logger logger = LogManager.getLogger(MovieServiceImpl.class);
 
-    public void createMovie(MovieDto movieDto, GenericRestResponse<Movie> response) {
+    public GenericRestResponse<Movie> createMovie(MovieDto movieDto) {
 
         UserDto userLogged = sessionDataService.getUserSession();
         LocalDateTime now = LocalDateTime.now();
@@ -60,13 +60,16 @@ public class MovieServiceImpl implements MovieService{
             movieGenreRepository.save(movieGenre);
         }
 
+        GenericRestResponse<Movie> response = new GenericRestResponse<>();
         response.setResponse(movie);
         response.setMessage("The movie has been created successfully");
         response.setStatusCode(HttpStatus.OK.value());
         response.setStatus(Constants.SUCCESS_RESPONSE);
+        
+        return response;
     }
 
-    public void updateMovie(UpdateMovieDto movieDto, GenericRestResponse<Movie> response) {
+    public GenericRestResponse<Movie> updateMovie(UpdateMovieDto movieDto) {
 
         if(movieDto.getId() == null){
             throw new InvalidUpdateOperationException(movieDto.getTitle());
@@ -82,13 +85,16 @@ public class MovieServiceImpl implements MovieService{
 
         movieRepository.save(movieToUpdate);
 
+        GenericRestResponse<Movie> response = new GenericRestResponse<>();
         response.setResponse(movieToUpdate);
         response.setMessage("The movie has been updated successfully");
         response.setStatusCode(HttpStatus.OK.value());
         response.setStatus(Constants.SUCCESS_RESPONSE);
+        
+        return response;
     }
 
-    public void deleteMovie(Long id, GenericRestResponse<Movie> response) {
+    public GenericRestResponse<Movie> deleteMovie(Long id) {
 
         // Checking if the movie with the id exists
         Optional<Movie> movieCheck = movieRepository.findById(id);
@@ -112,14 +118,17 @@ public class MovieServiceImpl implements MovieService{
         Movie movieToDelete = movieCheck.get();
         movieRepository.delete(movieToDelete);
 
+        GenericRestResponse<Movie> response = new GenericRestResponse<>();
         response.setResponse(movieToDelete);
         response.setMessage("The movie was deleted successfully.");
         response.setStatusCode(HttpStatus.OK.value());
         response.setStatus(Constants.SUCCESS_RESPONSE);
+        
+        return response;
     }
 
     @Cacheable("SearchMoviesCached")
-    public void searchMovies(QuerySearchRequestDto query, GenericRestListResponse<Movie> response) {
+    public GenericRestListResponse<Movie> searchMovies(QuerySearchRequestDto query) {
         String sort = query.getSort();
         String sortBy = query.getSortBy();
         Integer page = query.getPage();
@@ -154,6 +163,7 @@ public class MovieServiceImpl implements MovieService{
         PageRequest pageRequest = QuerySupport.getPageRequest(queryParams);
 
         Page<Movie> paginationResult = movieRepository.findAll(specs, pageRequest);
+        GenericRestListResponse<Movie> response = new GenericRestListResponse<>();
 
         if(paginationResult.isEmpty()){
             response.setMessage("No records were found...");
@@ -167,6 +177,8 @@ public class MovieServiceImpl implements MovieService{
             response.setStatus(Constants.SUCCESS_RESPONSE);
             response.setStatusCode(200);
         }
+
+        return response;
     }
 
     @Autowired

@@ -67,7 +67,7 @@ With Maven:
 `mvn spring-boot:run`
 
 With Docker:
-`docker compose --env-file .env up --build`.
+`docker compose --env-file .env up --build`
 
 The application will be available at http://localhost:8080
 

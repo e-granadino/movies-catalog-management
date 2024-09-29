@@ -29,10 +29,7 @@ public class MovieController {
     @ApiResponse(responseCode = "404", description = "No records were found with the search criteria.", content = {@Content(mediaType = "application/json")})
     @PostMapping("search")
     public GenericRestListResponse<Movie> searchMovies(@RequestBody QuerySearchRequestDto requestBody){
-        GenericRestListResponse<Movie> response = new GenericRestListResponse<>();
-        movieService.searchMovies(requestBody, response);
-
-        return response;
+        return movieService.searchMovies(requestBody);
     }
 
     @Operation(summary = "Create Movie", description = "Only admin users can create movies")
@@ -40,10 +37,7 @@ public class MovieController {
     @ApiResponse(responseCode = "401", description = "Unauthorized, user has not permissions to create movie", content = {@Content(mediaType = "application/json")})
     @PostMapping("create")
     public GenericRestResponse<Movie> createMovie(@Valid @RequestBody MovieDto movieDto){
-        GenericRestResponse<Movie> response = new GenericRestResponse<>();
-        movieService.createMovie(movieDto, response);
-
-        return response;
+        return movieService.createMovie(movieDto);
     }
 
     @Operation(summary = "Update Movie", description = "Only admin users can update movies")
@@ -51,10 +45,7 @@ public class MovieController {
     @ApiResponse(responseCode = "401", description = "Unauthorized, user has not permissions to update movie", content = {@Content(mediaType = "application/json")})
     @PutMapping("update")
     public GenericRestResponse<Movie> updateMovie(@Valid @RequestBody UpdateMovieDto movieDto){
-        GenericRestResponse<Movie> response = new GenericRestResponse<>();
-        movieService.updateMovie(movieDto, response);
-
-        return response;
+        return movieService.updateMovie(movieDto);
     }
 
     @Operation(summary = "Delete Movie", description = "Only admin users can update movies")
@@ -62,11 +53,8 @@ public class MovieController {
     @ApiResponse(responseCode = "400", description = "There was an issue deleting the move, It might be due the movie doesn't exist on the database", content = {@Content(mediaType = "application/json")})
     @ApiResponse(responseCode = "401", description = "Unauthorized, user has not permissions to delete movie", content = {@Content(mediaType = "application/json")})
     @DeleteMapping("delete/{id}")
-    public GenericRestResponse<Movie> deleteMovie(@PathVariable(name = "id", required = true) Long id){
-        GenericRestResponse<Movie> response = new GenericRestResponse<>();
-        movieService.deleteMovie(id, response);
-
-        return response;
+    public GenericRestResponse<Movie> deleteMovie(@PathVariable(name = "id") Long id){
+        return movieService.deleteMovie(id);
     }
 
     @Autowired

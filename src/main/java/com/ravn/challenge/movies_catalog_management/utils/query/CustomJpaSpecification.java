@@ -18,18 +18,18 @@ public class CustomJpaSpecification<T> implements Specification<T> {
         //Note: missing scenario for nested fields
         Path<String> pathString = root.get(filter.getField());
 
-        switch (filter.getOperator()) {
-            case EQUALS:
+        return switch (filter.getOperator()) {
+            case EQUALS ->
                 // Querying and comparing with Equals:
                 // select * from Model where field = query
-                return  cBuilder.equal(pathString, filter.getValue());
-            case LIKE:
+                    cBuilder.equal(pathString, filter.getValue());
+            case LIKE -> {
                 // Querying and comparing with Like:
                 // select * from Model where field like % query %
                 String fieldValue = "%" + filter.getValue().toString().toLowerCase() + "%";
-                return cBuilder.like(cBuilder.lower(pathString), fieldValue);
-            default:
-                return null;
-        }
+                yield cBuilder.like(cBuilder.lower(pathString), fieldValue);
+            }
+            default -> null;
+        };
     }
 }

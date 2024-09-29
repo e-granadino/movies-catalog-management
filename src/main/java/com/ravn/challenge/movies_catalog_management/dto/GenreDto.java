@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 public class GenreDto {
     @Schema(example = "1", minimum = "1")
-    Long id;
+    private Long id;
 
     @Schema(example = "Action")
-    String name;
+    private String name;
 }

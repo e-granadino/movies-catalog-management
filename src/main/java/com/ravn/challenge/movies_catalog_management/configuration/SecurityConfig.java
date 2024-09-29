@@ -22,12 +22,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity()
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        // codeql [java/disabled-csrf-protection]: Suppression Comment
+        http.csrf(AbstractHttpConfigurer::disable) // Disabling CSRF for stateless JWT-based application
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(whiteListEndpoints).permitAll()
@@ -66,8 +67,8 @@ public class SecurityConfig {
 
     // Public endpoints are listed below
     String[] whiteListEndpoints = new String[] {
-            "/api/v1/users/auth", "/api/v1/users/create", "/error",
-            "/swagger-ui/**", "/api-docs/**"
+            "/api/v1/users/auth", "/api/v1/users/create", "/api/v1/movies/search", "/error",
+            "/swagger-ui/**", "/api-docs/**", "/actuator/**"
     };
 
     // Sensitive operations are listed for admin only below

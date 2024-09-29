@@ -9,11 +9,11 @@ import com.ravn.challenge.movies_catalog_management.utils.GenericRestResponse;
 
 public interface MovieService {
 
-    void createMovie(MovieDto movieDto, GenericRestResponse<Movie> response);
+    GenericRestResponse<Movie> createMovie(MovieDto movieDto);
 
-    void updateMovie(UpdateMovieDto movieDto, GenericRestResponse<Movie> response);
+    GenericRestResponse<Movie> updateMovie(UpdateMovieDto movieDto);
 
-    void deleteMovie(Long id, GenericRestResponse<Movie> response);
+    GenericRestResponse<Movie> deleteMovie(Long id);
 
-    void searchMovies(QuerySearchRequestDto queryList, GenericRestListResponse<Movie> response);
+    GenericRestListResponse<Movie> searchMovies(QuerySearchRequestDto queryList);
 }

@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @Service
 public class RatingServiceImpl implements RatingService{
-    public void listRatingByUserName(GenericRestListResponse<Rating> response) {
+    public GenericRestListResponse<Rating>  listRatingByUserName() {
         UserDto userLogged = sessionDataService.getUserSession();
 
         if(userLogged == null){
@@ -30,13 +30,16 @@ public class RatingServiceImpl implements RatingService{
         }
 
         List<Rating> ratingList = ratingRepository.findByCreatedBy(userLogged.getUserName());
+        GenericRestListResponse<Rating> response = new GenericRestListResponse<>();
         response.setRecords(ratingList);
         response.setMessage("The rating has been authenticated successfully...");
         response.setStatusCode(HttpStatus.OK.value());
         response.setStatus(Constants.SUCCESS_RESPONSE);
+
+        return response;
     }
 
-    public void createUserRating(RatingDto ratingDto, GenericRestResponse<Rating> response) {
+    public GenericRestResponse<Rating> createUserRating(RatingDto ratingDto) {
         UserDto userLogged = sessionDataService.getUserSession();
 
         if(userLogged == null){
@@ -51,6 +54,7 @@ public class RatingServiceImpl implements RatingService{
 
         //Verifying user hasn't rated the movie before
         List<Rating> ratigList = ratingRepository.findByMovieIdAndCreatedBy(ratingDto.getMovieId(), userLogged.getUserName());
+        GenericRestResponse<Rating> response = new GenericRestResponse<>();
 
         if(ratigList.isEmpty()){
             Rating ratingToSave = new Rating();
@@ -74,9 +78,11 @@ public class RatingServiceImpl implements RatingService{
             response.setStatusCode(HttpStatus.CONFLICT.value());
         }
 
+        return response;
+
     }
 
-    public void deleteUserRating(Long ratingId, GenericRestResponse<Rating> response) {
+    public GenericRestResponse<Rating> deleteUserRating(Long ratingId) {
         // Checking if the rating exists
         Optional<Rating> ratingCheck = ratingRepository.findById(ratingId);
         if(ratingCheck.isEmpty()){
@@ -86,10 +92,12 @@ public class RatingServiceImpl implements RatingService{
         Rating ratingToDelete = ratingCheck.get();
         ratingRepository.delete(ratingToDelete);
 
+        GenericRestResponse<Rating> response = new GenericRestResponse<>();
         response.setResponse(ratingToDelete);
         response.setMessage("The rating has been deleted successfully.");
         response.setStatusCode(HttpStatus.OK.value());
         response.setStatus(Constants.SUCCESS_RESPONSE);
+        return response;
     }
 
     public List<Rating> findByMovieId(Long movieId) {

@@ -3,8 +3,10 @@ package com.ravn.challenge.movies_catalog_management.utils.query;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Filter {
+public class Filter implements Serializable {
     @Schema(example = "synopsis")
     private String field;
 
