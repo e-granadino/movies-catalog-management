@@ -29,9 +29,9 @@ jobs:
         uses: einaregilsson/beanstalk-deploy@v20
         with:
           application_name: "movie-catalog-management"
-          environment_name: "Movie-catalog-management-env"
+          environment_name: "movie-catalog-management-pr"
           region: "us-east-2"
-          version_label: "v1.0.1"
+          version_label: "v1.0.2"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           deployment_package: deploy.zip
