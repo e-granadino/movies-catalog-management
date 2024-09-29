@@ -27,7 +27,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // codeql [java/disabled-csrf-protection]: Suppression Comment
         http.csrf(AbstractHttpConfigurer::disable) // Disabling CSRF for stateless JWT-based application
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
