@@ -31,7 +31,7 @@ jobs:
           application_name: "movie-catalog-management"
           environment_name: "Movie-catalog-management-env"
           region: "us-east-2"
-          version_label: "v1.0.0"
+          version_label: "v1.0.1"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           deployment_package: deploy.zip
