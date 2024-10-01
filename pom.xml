@@ -14,7 +14,7 @@
 	</parent>
 	<groupId>com.ravn.challenge</groupId>
 	<artifactId>movies-catalog-management</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>movies-catalog-management</name>
 	<description>API to manage a movie catalog</description>
 	<url/>

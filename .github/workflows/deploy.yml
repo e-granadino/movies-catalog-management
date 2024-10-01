@@ -31,10 +31,9 @@ jobs:
           application_name: "movie-catalog-api"
           environment_name: "movie-catalog-api-env"
           region: "us-east-1"
-          version_label: "v1.0.4"
+          version_label: "1.0.0"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           use_existing_version_if_available: true
           deployment_package: deploy.zip
           wait_for_deployment: true
-          timeout: 5
