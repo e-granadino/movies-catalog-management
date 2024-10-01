@@ -36,4 +36,5 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           deployment_package: deploy.zip
           wait_for_deployment: true
+          use_existing_version_if_available: true
           timeout: 5
