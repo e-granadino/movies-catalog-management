@@ -1,1 +1,0 @@
-web: java -jar target/movies-catalog-management-1.0.0-SNAPSHOT.jar
