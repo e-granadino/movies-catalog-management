@@ -13,8 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+#      - name: Generate deployment package
+#        run: zip -r deploy.zip . -x '*.git*'
 
       - name: Set up JDK 17
         uses: actions/setup-java@v2
@@ -31,7 +31,8 @@ jobs:
           application_name: "movie-catalog-api"
           environment_name: "movie-catalog-api-env"
           region: "us-east-1"
-          version_label: "v1.0.0"
+          version_label: "v-${{ github.sha }}"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          deployment_package: deploy.zip
+          file: "target/movies-catalog-management-0.0.1-SNAPSHOT.jar"
+#          deployment_package: deploy.zip
